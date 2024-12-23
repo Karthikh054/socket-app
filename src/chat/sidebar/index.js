@@ -21,8 +21,8 @@ const SideBar = () =>{
                 aria-label="wrapped label tabs example"
                 variant="fullWidth"
             >
-                <Tab icon={<ChatBubbleOutlineIcon/>} iconPosition="start" value="0" label="Chat List"/>
-                <Tab icon={<PersonIcon/>} iconPosition="start" value="1" label="User List" />
+                <Tab icon={<ChatBubbleOutlineIcon fontSize="small"/>} sx={{minHeight:"inherit"}} iconPosition="start" value="0" label="Chat List"/>
+                <Tab icon={<PersonIcon fontSize="medium"/>} sx={{minHeight:"inherit"}} iconPosition="start" value="1" label="User List" />
             </Tabs>
             {
                 value == 0 && 
@@ -47,7 +47,126 @@ const SideBar = () =>{
         />
       </ListItem>
       <Divider component="li" />
-      
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Vikas Kumar"
+          secondary={
+            
+              <Typography
+                variant="caption"
+                sx={{ color: 'text.primary', display: 'inline' }}
+              >
+                Ali Connors
+              </Typography>
+              
+            
+          }
+        />
+      </ListItem>
+      <Divider component="li" />
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Vikas Kumar"
+          secondary={
+            
+              <Typography
+                variant="caption"
+                sx={{ color: 'text.primary', display: 'inline' }}
+              >
+                Ali Connors
+              </Typography>
+              
+            
+          }
+        />
+      </ListItem>
+      <Divider component="li" />
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Vikas Kumar"
+          secondary={
+            
+              <Typography
+                variant="caption"
+                sx={{ color: 'text.primary', display: 'inline' }}
+              >
+                Ali Connors
+              </Typography>
+              
+            
+          }
+        />
+      </ListItem>
+      <Divider component="li" />
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Vikas Kumar"
+          secondary={
+            
+              <Typography
+                variant="caption"
+                sx={{ color: 'text.primary', display: 'inline' }}
+              >
+                Ali Connors
+              </Typography>
+              
+            
+          }
+        />
+      </ListItem>
+      <Divider component="li" />
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Vikas Kumar"
+          secondary={
+            
+              <Typography
+                variant="caption"
+                sx={{ color: 'text.primary', display: 'inline' }}
+              >
+                Ali Connors
+              </Typography>
+              
+            
+          }
+        />
+      </ListItem>
+      <Divider component="li" />
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+        </ListItemAvatar>
+        <ListItemText
+          primary="Vikas Kumar"
+          secondary={
+            
+              <Typography
+                variant="caption"
+                sx={{ color: 'text.primary', display: 'inline' }}
+              >
+                Ali Connors
+              </Typography>
+              
+            
+          }
+        />
+      </ListItem>
+      <Divider component="li" />
     </List>
                 
             }

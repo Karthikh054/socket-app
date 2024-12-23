@@ -8,7 +8,7 @@ export default function Header() {
       <Card sx={{bgcolor:"primary.light",borderRadius:0, color:"primary.contrastText"}}>
         <CardHeader 
         avatar={<Avatar>R</Avatar>}
-        actions={
+        action={
             <IconButton aria-label='settings' sx={{color:"primary.contrastText"}}>
                 <MoreVertIcon/>
             </IconButton>
