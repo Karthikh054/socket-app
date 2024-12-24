@@ -6,7 +6,9 @@ app.use(express.json());
 const userController = require("./controller/user");
 const connectMongoDB = require("./config/db");
 app.use("/user",userController);
-connectMongoDB.then(()=>{
+
+connectMongoDB()
+.then(()=>{
     app.listen(5000, ()=>{
         console.log("server is running");
     });

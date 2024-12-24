@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
-const PATH = "mongodb://localhost:27017/chatAPI";
+const PATH = "mongodb+srv://hkarthik054:Asdf@cluster0.1qe7t.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 
-const connectMongoDB = ()=>{
+const connectMongoDB = async ()=>{
     try{
-        mongoose.connect(PATH);
-        console.log("connected monogoose db");
+        await mongoose.connect(PATH);
     }catch(error){
         console.log(error);
     }
