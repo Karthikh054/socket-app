@@ -42,7 +42,7 @@ router.post("/register", async (req,res) =>{
         name: user.name,
         email: user.email,
     }, "shhhh", {expiresIn:"1d"});
-    return res.status(200).send({token});
+       return res.status(200).send({data:token, msg:"Login"});
     }catch(error){
         res.status(400).send({msg:"Internal Server Error"});
     }

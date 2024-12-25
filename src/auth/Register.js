@@ -1,4 +1,5 @@
 import {
+  Alert,
     Box,
     Button,
     Container,
@@ -7,11 +8,35 @@ import {
     TextField,
     Typography,
   } from "@mui/material";
-  import React from "react";
+import axios from "axios";
+import React, { useState } from "react";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
   
   export default function Register() {
     const navigate = useNavigate();
+    const [formError,setFormError] = useState();
+    const {
+      register,
+      handleSubmit,
+      formState: {errors},
+    } = useForm();
+
+    const onSubmit = (data) =>{
+      axios.post("http://localhost:5000/user/register",data)
+      .then((res)=>{
+        localStorage.setItem("token",res.data.data);
+        navigate("/app");
+      })
+      .catch((err)=>{
+        setFormError(err.response.data);
+      });
+    }
+    const token = localStorage.getItem("token");
+    useEffect(() => {
+      if(token) navigate("/app");
+    },[]);
     return (
       <Container
         maxWidth="md"
@@ -59,19 +84,36 @@ import { useNavigate } from "react-router-dom";
               square
               sx={{height:'100%', display:'flex', alignItems:'center', flexDirection:'column' }}
             >
-              <Box sx={{p:5}}>
-              <h1>Register</h1>
-              <TextField fullWidth id="name" label="Full Name" variant="outlined" sx={{mb:3}}/>
-              <TextField fullWidth id="email" label="Email" variant="outlined" sx={{mb:3}}/>
+              <Box sx={{p:5}} component="form" onSubmit={handleSubmit(onSubmit)}>
+                {formError && (
+                  <Alert sx={{mb:3}} severity="error">{formError.msg}</Alert>
+                )}
+                
+              <Typography variant="h5" sx={{mb:2, fontWeight:"500",textTransform:"uppercase"}}>Register</Typography>
+              <TextField fullWidth id="name" label="Full Name" variant="outlined" sx={{mb:3}} {...register("name",{
+                required:"This field is required",
+              })} error={!!errors.name} helperText={errors.name && errors.name.message}/>
+              <TextField fullWidth id="email" label="Email" variant="outlined" sx={{mb:3}} {...register("email",{
+                required:"This field is required",
+                pattern:{
+                  value:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+                  message: "Invalid email",
+                }
+              })} error={!!errors.email} helperText={errors.email && errors.email.message}/>
               <TextField
                 fullWidth
+                type="password"
                 id="password"
                 label="Password"
                 variant="outlined"
                 sx={{mb:3}}
+                {...register("password",{
+                  required:"This field is required",
+                })}
+                error={!!errors.password} helperText={errors.password && errors.password.message}
               />
               
-              <Button fullWidth variant="contained" sx={{ py: 2 }}>
+              <Button type="submit" fullWidth variant="contained" sx={{ py: 2 }}>
                 Register
               </Button>
               </Box>

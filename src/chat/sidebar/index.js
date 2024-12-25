@@ -4,7 +4,7 @@ import { useState } from "react";
 import PersonIcon from '@mui/icons-material/Person';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
-const SideBar = () =>{
+const SideBar = ({user}) =>{
 
     const [value, setValue] = useState(0);
 
@@ -13,8 +13,8 @@ const SideBar = () =>{
     };
 
     return(
-        <Box sx={{width:"25vw"}}>
-            <Header/>
+        <Box sx={{width:"25vw",display:"flex",flexDirection:"column",height:"100%"}}>
+            <Header user={user}/>
             <Tabs
                 value={value}
                 onChange={handleChange}
