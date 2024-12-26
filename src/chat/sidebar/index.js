@@ -4,8 +4,8 @@ import { useState } from "react";
 import PersonIcon from '@mui/icons-material/Person';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
-const SideBar = ({user}) =>{
-
+const SideBar = ({user, onlineUsers}) =>{
+  
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {

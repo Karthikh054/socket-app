@@ -10,10 +10,12 @@ const PATH = "http://localhost:5000";
 const Chat = () =>{
     const socketRef = useRef();
     const [isConnected, setConnected] = useState();
+    const [onlineUsers, setOnlineUseres] = useState();
     const {state} = useLocation();
     const navigate = useNavigate();
     useEffect(() => {
         if(!state) navigate("/");
+        console.log("jhiiii", state);
         const socket = io.connect(PATH);
         socketRef.current = socket;
         socket.on("connect", () => {
@@ -25,12 +27,15 @@ const Chat = () =>{
     useEffect(() => {
         if(isConnected){
             socketRef.current.emit("ADD_USER", state);
+            socketRef.current.on("USER_ADDED",(data) => {
+                setOnlineUseres(data);
+            });
         }
     },[isConnected]);
 
     return (
         <Paper square elevation={0} sx={{height:'100vh', display:'flex'}}>
-            <SideBar user={state}/>
+            <SideBar user={state} onlineUsers={onlineUsers}/>
             <ChatBox/>
             <Profile user={state}/> 
         </Paper>

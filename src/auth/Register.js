@@ -9,6 +9,7 @@ import {
     Typography,
   } from "@mui/material";
 import axios from "axios";
+import { jwtDecode } from "jwt-decode";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -27,7 +28,9 @@ import { useNavigate } from "react-router-dom";
       axios.post("http://localhost:5000/user/register",data)
       .then((res)=>{
         localStorage.setItem("token",res.data.data);
-        navigate("/app");
+        const user = jwtDecode(res.data.data);
+        localStorage.setItem("user",JSON.stringify(user));
+        navigate("/app",{state: user});
       })
       .catch((err)=>{
         setFormError(err.response.data);

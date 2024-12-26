@@ -2,8 +2,13 @@ const socket = require("socket.io");
 
 const onlineUsers = [];
 
-const addUser = (user) => {
-
+const addUser = (user, socketId) => {
+    const isExist = onlineUsers.findIndex((item) => item._id === user._id);
+    if(isExist !== -1){
+        onlineUsers.splice(isExist, 1);
+    }
+    user.socketId = socketId;
+    onlineUsers.push(user);
 };
 
 const socketInit = (server) => {

@@ -22,12 +22,18 @@ export default function Login() {
       handleSubmit,
       formState: {errors},
     } = useForm();
+    const isUserExist = localStorage.getItem("user");
+    
+    useEffect(() => {
+      if(isUserExist) navigate("/app",{state :JSON.parse(isUserExist)});
+    },[]);
     const onSubmit = (data) =>{
       axios.post("http://localhost:5000/user/login",data)
       .then((res)=>{
         localStorage.setItem("token",res.data.data);
         const user = jwtDecode(res.data.data);
-        if(token) navigate("/app",{state : user});
+        localStorage.setItem("user",JSON.stringify(user));
+        navigate("/app",{state : user});
       })
       .catch((err)=>{
         setFormError(err.response.data);
