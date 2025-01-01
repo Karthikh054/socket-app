@@ -1,4 +1,5 @@
 const socket = require("socket.io");
+const { saveMsg } = require("../controller/message");
 
 const onlineUsers = [];
 
@@ -9,6 +10,13 @@ const addUser = (user, socketId) => {
     }
     user.socketId = socketId;
     onlineUsers.push(user);
+};
+
+const removeUser = (socketId) => {
+    const isExist = onlineUsers.findIndex((item) => item.socketId === socketId);
+    if(isExist !== -1){
+        onlineUsers.splice(isExist,1);
+    }
 };
 
 const socketInit = (server) => {
@@ -22,7 +30,17 @@ const socketInit = (server) => {
         socket.on("ADD_USER", (user)=>{
             addUser(user, socket.id);
             io.emit("USER_ADDED", onlineUsers);
-        })
+        });
+
+        socket.on("SEND_MSG", (msg)=>{
+            saveMsg(msg);
+            socket.to(msg.receiver.socketId).emit("RECEIVED_MSG", msg);
+        });
+
+        socket.on("disconnect", () => {
+            removeUser(socket.id);
+            io.emit("USER_ADDED", onlineUsers);
+        });
     })
 };
 

@@ -22,7 +22,7 @@ export default function Login() {
       handleSubmit,
       formState: {errors},
     } = useForm();
-    const isUserExist = localStorage.getItem("user");
+    const isUserExist = sessionStorage.getItem("user");
     
     useEffect(() => {
       if(isUserExist) navigate("/app",{state :JSON.parse(isUserExist)});
@@ -30,16 +30,16 @@ export default function Login() {
     const onSubmit = (data) =>{
       axios.post("http://localhost:5000/user/login",data)
       .then((res)=>{
-        localStorage.setItem("token",res.data.data);
+        sessionStorage.setItem("token",res.data.data);
         const user = jwtDecode(res.data.data);
-        localStorage.setItem("user",JSON.stringify(user));
+        sessionStorage.setItem("user",JSON.stringify(user));
         navigate("/app",{state : user});
       })
       .catch((err)=>{
         setFormError(err.response.data);
       });
     }
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     useEffect(() => {
       if(token) navigate("/app");
     },[]);

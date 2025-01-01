@@ -11,7 +11,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import VideoCallIcon from '@mui/icons-material/VideoCall';
 import CallIcon from '@mui/icons-material/Call';
 
-export default function Header() {
+export default function Header({roomData}) {
   return (
     <Card
       sx={{
@@ -31,9 +31,9 @@ export default function Header() {
           </IconButton>
             </>
         }
-        title="Karthik"
+        title={roomData.receiver.name}
         subheader={
-          <Typography variant="caption">UI Frontend Developer</Typography>
+          <Typography variant="caption">{roomData.receiver.email}</Typography>
         }
       />
     </Card>

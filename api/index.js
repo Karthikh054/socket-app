@@ -12,7 +12,7 @@ const server = http.createServer(app);
 
 connectMongoDB()
 .then(()=>{
-    app.listen(5000, () => {
+    server.listen(5000, () => {
         socket(server);
         console.log("server is running");
     });
