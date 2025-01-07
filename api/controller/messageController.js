@@ -1,12 +1,8 @@
 const express = require("express");
+const { getMsg, delMsg } = require("./message");
 const router = express.Router();
 
-router.get("/:id", async (req, res) => {
-    try{
-
-    }catch(error){
-        return res.status(400).send({msg:"Internal Server Error"})
-    }
-});
+router.get("/:id", getMsg);
+router.delete("/:id", delMsg);
 
 module.exports = router;

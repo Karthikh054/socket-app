@@ -32,6 +32,9 @@ const msgSchema = new mongoose.Schema({
             required: true,
         },
     },
+    replyMsg:{
+
+    }
 },
 
 {

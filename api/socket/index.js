@@ -32,9 +32,13 @@ const socketInit = (server) => {
             io.emit("USER_ADDED", onlineUsers);
         });
 
-        socket.on("SEND_MSG", (msg)=>{
-            saveMsg(msg);
-            socket.to(msg.receiver.socketId).emit("RECEIVED_MSG", msg);
+        socket.on("SEND_MSG", async (msg)=>{
+          const isSaved = await saveMsg(msg);
+            socket.to(msg.receiver.socketId).to(msg.sender.socketId).emit("RECEIVED_MSG", isSaved);
+        });
+
+        socket.on("DELETE_MSG", (msg)=>{
+            socket.to(msg.receiver.socketId).emit("DELETED_MSG", msg);
         });
 
         socket.on("disconnect", () => {

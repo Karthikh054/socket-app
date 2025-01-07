@@ -6,8 +6,10 @@ app.use(cors());
 app.use(express.json());
 const socket = require("./socket");
 const userController = require("./controller/user");
+const messageController = require("./controller/messageController");
 const connectMongoDB = require("./config/db");
 app.use("/user",userController);
+app.use("/message",messageController);
 const server = http.createServer(app);
 
 connectMongoDB()
